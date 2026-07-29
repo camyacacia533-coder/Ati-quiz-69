@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch 69 Quiz — Arthritis &amp; Connective Tissue Diseases</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin:0; padding:16px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#0f1419; color:#e6edf3; min-height:100vh;
+  }
+  .wrap{max-width:780px;margin:0 auto;}
+  h1{font-size:1.3rem;margin:0 0 3px 0;color:#79c0ff;}
+  .sub{font-size:.8rem;color:#8b949e;margin:0 0 14px 0;}
+  #setup .decks{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 16px 0;}
+  .deck-btn{background:#1c2530;border:1px solid #30363d;color:#c9d1d9;padding:9px 14px;border-radius:20px;font-size:.84rem;cursor:pointer;}
+  .deck-btn.active{background:#1f6feb;border-color:#1f6feb;color:#fff;font-weight:600;}
+  .deck-btn .cnt{opacity:.65;font-size:.72rem;margin-left:4px;}
+  #setup button.start{width:100%;padding:14px;border-radius:10px;border:none;background:#238636;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;margin-top:6px;}
+  #setup button.start:hover{background:#2ea043;}
+  #setup{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:18px;}
+  #setup h2{font-size:.95rem;color:#e6edf3;margin:14px 0 4px 0;}
+  #setup p.note{font-size:.78rem;color:#8b949e;margin:2px 0 0 0;}
+
+  #quiz{display:none;}
+  .bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:10px 13px;margin-bottom:12px;font-size:.82rem;color:#8b949e;}
+  .bar b{color:#e6edf3;}
+  .prog-track{flex:1 1 100px;height:6px;background:#21262d;border-radius:3px;overflow:hidden;min-width:80px;}
+  .prog-fill{height:100%;background:linear-gradient(90deg,#1f6feb,#58a6ff);width:0%;transition:width .3s;}
+
+  .qcard{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:22px 20px;margin-bottom:14px;}
+  .qtag{font-size:.68rem;color:#6e7681;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;justify-content:space-between;}
+  .qtype{background:#21262d;padding:2px 8px;border-radius:10px;color:#d29922;}
+  .qtext{font-size:1.04rem;line-height:1.55;color:#e6edf3;margin-bottom:16px;font-weight:500;}
+  .opt{
+    display:flex;align-items:flex-start;gap:10px;background:#1c2530;border:1px solid #30363d;
+    border-radius:9px;padding:12px 13px;margin-bottom:8px;cursor:pointer;font-size:.94rem;line-height:1.4;
+    transition:all .12s;
+  }
+  .opt:hover{border-color:#58a6ff;}
+  .opt .mark{flex:0 0 20px;height:20px;border:2px solid #484f58;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:transparent;margin-top:1px;}
+  .opt.sata .mark{border-radius:4px;}
+  .opt.selected{border-color:#58a6ff;background:#1c2d42;}
+  .opt.selected .mark{background:#1f6feb;border-color:#1f6feb;color:#fff;}
+  .opt.correct{border-color:#2ea043;background:#122117;}
+  .opt.correct .mark{background:#2ea043;border-color:#2ea043;color:#fff;}
+  .opt.incorrect{border-color:#f85149;background:#2a1417;}
+  .opt.incorrect .mark{background:#f85149;border-color:#f85149;color:#fff;}
+  .opt.disabled{cursor:default;}
+
+  .rationale{display:none;margin-top:14px;padding:13px 15px;background:#0d1520;border-left:4px solid #58a6ff;border-radius:6px;font-size:.9rem;line-height:1.55;color:#c9d1d9;}
+  .rationale.show{display:block;}
+  .rationale .lbl{font-weight:700;color:#58a6ff;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:block;}
+  .rationale .lbl.wrong{color:#f85149;}
+  .rationale .lbl.right{color:#3fb950;}
+
+  .ctrls{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;}
+  button.act{flex:1 1 100px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;padding:12px 10px;border-radius:9px;font-size:.88rem;cursor:pointer;font-weight:600;}
+  button.act:hover{background:#30363d;border-color:#58a6ff;}
+  button.act.primary{background:#1f6feb;border-color:#1f6feb;color:#fff;}
+  button.act.primary:hover{background:#388bfd;}
+  button.act:disabled{opacity:.35;cursor:not-allowed;}
+
+  #results{display:none;background:#161b22;border:1px solid #30363d;border-radius:14px;padding:26px 22px;text-align:center;}
+  #results .score{font-size:2.6rem;font-weight:800;color:#58a6ff;margin:8px 0;}
+  #results .pct{font-size:1.1rem;color:#8b949e;margin-bottom:18px;}
+  #results button{margin:5px;}
+  .note{font-size:.74rem;color:#6e7681;text-align:center;margin-top:10px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Chapter 69 — Arthritis &amp; Connective Tissue Diseases</h1>
+  <p class="sub">Hard ATI-style quiz · NCLEX-format stems, SATA, priority/delegation items · rationales on every answer</p>
+
+  <div id="setup">
+    <h2>Choose a section</h2>
+    <div class="decks" id="setupDecks"></div>
+    <h2>Choose length</h2>
+    <div class="decks" id="lenDecks"></div>
+    <button class="start" onclick="startQuiz()">Start Quiz</button>
+    <p class="note">Questions and answer order are shuffled every time. SATA items require every correct option and no incorrect ones.</p>
+  </div>
+
+  <div id="quiz">
+    <div class="bar">
+      <span>Question <b id="pos">0</b> / <b id="tot">0</b></span>
+      <div class="prog-track"><div class="prog-fill" id="fill"></div></div>
+      <span>Score: <b id="scoreLive">0</b></span>
+    </div>
+    <div class="qcard">
+      <div class="qtag"><span id="tag"></span><span class="qtype" id="qtype"></span></div>
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+      <div class="rationale" id="rationale"></div>
+    </div>
+    <div class="ctrls">
+      <button class="act primary" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+      <button class="act" id="nextBtn" onclick="nextQ()" disabled>Next Question →</button>
+    </div>
+  </div>
+
+  <div id="results">
+    <div>Quiz Complete</div>
+    <div class="score" id="finalScore">0 / 0</div>
+    <div class="pct" id="finalPct"></div>
+    <button class="act primary" onclick="retryMissed()">Retry Missed Questions</button>
+    <button class="act" onclick="location.reload()">New Quiz</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+{d:"OA",type:"single",q:"The nurse is teaching a 45-year-old patient newly diagnosed with osteoarthritis. Which statement by the patient indicates a need for further teaching?",
+opts:["\"I should try to lose weight since I'm overweight.\"","\"This is just part of getting older and there's nothing I can do to slow it down.\"","\"Using a cane on my unaffected side might help take pressure off my hip.\"","\"I should warm up before I exercise to lower my risk of injury.\""],
+correct:[1],
+rationale:"<span class='lbl wrong'>Needs further teaching:</span> OA is NOT a normal part of aging — although aging is one risk factor, the disease process is not inevitable and modifiable risk factors (weight, joint protection, exercise) can slow progression. The other three statements reflect correct understanding of OA management."},
+
+{d:"OA",type:"single",q:"A patient with knee OA asks the nurse why her knee feels stiff every morning but loosens up after about 20 minutes. What is the nurse's best response?",
+opts:["\"This pattern suggests you may actually have rheumatoid arthritis instead.\"","\"Stiffness that resolves within about 30 minutes is typical of osteoarthritis and is called the gelling phenomenon.\"","\"You should be concerned — normal OA stiffness should resolve immediately.\"","\"This means your OA is progressing rapidly and you need x-rays today.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> OA morning stiffness (the gelling phenomenon) typically resolves within 30 minutes. This is a hallmark distinction from RA, where stiffness lasts 60 minutes to all day. There is no indication of urgency or need for immediate imaging based on this normal finding."},
+
+{d:"OA",type:"sata",q:"The nurse is reviewing the pathophysiology of OA with a nursing student. Which statements accurately describe OA? Select all that apply.",
+opts:["OA involves gradual loss of articular cartilage with osteophyte formation at joint margins.","OA is fundamentally an autoimmune process mediated by rheumatoid factor.","Secondary synovitis can occur when phagocytes attempt to remove torn cartilage fragments.","Central cartilage becomes thinner while cartilage at the joint edges thickens.","OA typically produces fever, fatigue, and multi-organ involvement."],
+correct:[0,2,3],
+rationale:"<span class='lbl right'>Correct (0,2,3):</span> OA is characterized by cartilage loss and osteophyte formation, secondary synovitis from phagocytosis of cartilage debris, and asymmetric thinning/thickening of cartilage. <span class='lbl wrong'>Incorrect:</span> OA is NOT autoimmune (that's RA) and does NOT cause fever, fatigue, or organ involvement — those are hallmarks of inflammatory disease, absent in OA."},
+
+{d:"OA",type:"single",q:"A patient with hip OA reports increasing difficulty rising from a low chair and pain that radiates to the groin and buttock. The nurse recognizes this presentation is consistent with which condition?",
+opts:["Rheumatoid arthritis of the hip","Referred pain pattern typical of hip OA","Gouty arthritis of the hip","Lyme arthritis"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Hip OA classically causes pain referred to the groin, buttock, or lateral thigh/knee, and difficulty rising from chairs where the hips are lower than the knees. This is a textbook OA presentation, not RA (which is symmetric/systemic), gout (episodic, usually great toe first), or Lyme (associated with tick exposure and rash)."},
+
+{d:"OA",type:"single",q:"Which finding on physical examination would the nurse expect in a patient with advanced knee OA but NOT in a patient with early rheumatoid arthritis?",
+opts:["Symmetric swelling of both knees","Crepitation with a grating sensation on movement","Systemic fever and fatigue","Morning stiffness lasting over an hour"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Crepitation — a grating sensation from loose cartilage particles in the joint — is characteristic of OA, especially in the knee. Symmetric swelling, systemic fever/fatigue, and prolonged morning stiffness (>1 hr) are all hallmarks of RA, not OA."},
+
+{d:"OA",type:"single",q:"The nurse reviews synovial fluid analysis results for a patient being evaluated for joint pain. Which finding is most consistent with osteoarthritis rather than rheumatoid arthritis?",
+opts:["WBC count of 15,000/µL with predominant neutrophils","Cloudy, straw-colored fluid with fibrin flecks","Clear, yellow fluid with a WBC count under 2000/µL","Needle-like crystals visible under polarized light"],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> OA synovial fluid is classically clear yellow with little inflammation and WBC <2000/µL. A WBC of 15,000 with neutrophils and cloudy/fibrin-flecked fluid describe RA. Needle-like crystals describe gout, not OA."},
+
+{d:"OA",type:"single",q:"A patient with OA has been taking ibuprofen 400 mg four times a day for 6 months. Which assessment finding is the priority for the nurse to investigate?",
+opts:["Mild transient joint stiffness in the morning","Reports of black, tarry stools","A 2-lb weight gain over the past month","Occasional use of a topical menthol rub"],
+correct:[1],
+rationale:"<span class='lbl right'>Priority:</span> Black, tarry stools (melena) suggest GI bleeding, a serious adverse effect of long-term NSAID use from COX-1 inhibition. This requires immediate follow-up. The other findings are not urgent or expected/benign."},
+
+{d:"OA",type:"single",q:"A patient taking an oral NSAID for OA asks the nurse if she can also apply an over-the-counter topical NSAID gel to her knee for extra relief. What is the nurse's best response?",
+opts:["\"That's a great idea — combining them will give you much better pain relief.\"","\"You should avoid combining an oral NSAID with a topical NSAID due to increased risk for adverse effects.\"","\"Topical NSAIDs are not absorbed, so it's completely safe to combine them.\"","\"You'll need to double your oral dose if you want to add a topical agent.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Patients on an oral NSAID should avoid topical NSAIDs because of increased risk for adverse effects (bleeding, GI irritation) from combined systemic exposure. Topical NSAIDs ARE systemically absorbed to some degree."},
+
+{d:"OA",type:"single",q:"The nurse is caring for a patient who just received an intraarticular corticosteroid injection in the knee for OA. Which instruction is most important to include?",
+opts:["\"Apply heat to the joint immediately for 30 minutes.\"","\"You may notice the joint feels temporarily worse right after the injection — avoid overusing it.\"","\"You will need weekly injections indefinitely.\"","\"This injection will cure your osteoarthritis permanently.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Patients should be told the joint may temporarily feel worse right after injection and to avoid overusing the joint immediately afterward. Improvement lasts weeks to months, not permanently, and four or more injections without relief warrants further intervention rather than indefinite weekly dosing."},
+
+{d:"OA",type:"single",q:"Which patient statement about capsaicin cream indicates the teaching was effective?",
+opts:["\"I'll apply it once and that should control my pain all week.\"","\"I can use a heating pad right after I apply it to boost the effect.\"","\"I need to use it at regular intervals, and I'll avoid using a heating pad with it because of burn risk.\"","\"I should stop using it if I don't feel a burning sensation.\""],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Capsaicin must be used at regular intervals for maximal effect, and combining it with an external heat source increases burn risk. A burning sensation is an expected effect of the drug, not a reason to stop, and it does not provide week-long relief from a single application."},
+
+{d:"OA",type:"single",q:"An older adult with OA and a history of GI bleeding needs an NSAID for pain control. Which medication would the nurse expect the provider to add to reduce GI risk?",
+opts:["Misoprostol (Cytotec)","Allopurinol (Zyloprim)","Hydroxychloroquine (Plaquenil)","Colchicine"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Misoprostol (Cytotec) is a protective agent added when a patient is at risk for or develops GI side effects from NSAIDs (Arthrotec is the combined product). Allopurinol and colchicine treat gout; hydroxychloroquine is a DMARD/antimalarial for RA/SLE."},
+
+{d:"OA",type:"sata",q:"The nurse is teaching a patient about joint protection and energy conservation for OA. Which instructions should be included? Select all that apply.",
+opts:["Avoid forceful repetitive joint movements.","Use assistive devices only after the disease becomes severe.","Organize routine tasks and pace yourself to decrease fatigue.","Maintain a healthy weight.","Avoid all physical activity to protect the joints."],
+correct:[0,2,3],
+rationale:"<span class='lbl right'>Correct (0,2,3):</span> Avoiding forceful repetitive movement, pacing tasks, and maintaining healthy weight are all part of joint protection teaching. <span class='lbl wrong'>Incorrect:</span> Assistive devices should be used as needed, not delayed until severe disease, and complete avoidance of activity is harmful — regular moderate exercise is recommended."},
+
+{d:"OA",type:"single",q:"A patient with OA asks about glucosamine and chondroitin supplements. What is the nurse's best response based on current evidence?",
+opts:["\"These are strongly recommended by the ACR and AAOS for all OA patients.\"","\"Study results are mixed, and the ACR and AAOS do not recommend their use.\"","\"These supplements are FDA-approved to reverse cartilage damage.\"","\"You should stop all other OA treatments and switch to these supplements.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Study results on glucosamine and chondroitin are mixed, and neither the American College of Rheumatology nor the American Academy of Orthopaedic Surgeons recommends their use. No DMOAD, including these supplements, is FDA-approved to modify OA progression."},
+
+{d:"OA",type:"single",q:"Which teaching point should the nurse include regarding heat versus cold application for a patient with OA?",
+opts:["Ice is used more often than heat because OA is primarily an inflammatory condition.","Heat is especially useful for stiffness because it increases flexibility and blood flow.","Cold should be applied for 45 minutes at a time for maximum benefit.","Heat should never be used in OA under any circumstances."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Heat is especially useful for OA stiffness — it increases flexibility and improves blood flow. Ice is used less often than heat in OA and is reserved for acute inflammation/swelling. Cold applications in general should not exceed 10-15 minutes (per RA guidance, applicable principle), not 45 minutes."},
+
+{d:"OA",type:"single",q:"A 60-year-old woman with knee OA asks the nurse about sexual activity, stating she avoids it due to joint stiffness. What is the nurse's best suggestion?",
+opts:["\"You should avoid sexual activity entirely until your OA improves.\"","\"Taking an analgesic or a warm bath before sexual activity may help decrease joint stiffness.\"","\"This isn't something we typically discuss for OA patients.\"","\"There is nothing that can be done to help with this issue.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Sexual counseling for arthritis patients includes encouraging analgesics or a warm bath before activity to decrease joint stiffness, along with discussing alternative positions and timing. This is an appropriate and evidence-based topic for the nurse to address."},
+
+{d:"RA",type:"single",q:"A patient newly diagnosed with rheumatoid arthritis asks the nurse why the provider wants to start methotrexate right away, even though her symptoms are mild. What is the nurse's best explanation?",
+opts:["\"Methotrexate is only used once your RA has caused visible joint deformity.\"","\"Irreversible joint changes can occur as early as the first year of RA, so early aggressive treatment can slow disease progression.\"","\"Methotrexate is started only after all other drugs have failed.\"","\"Early treatment isn't necessary — RA typically doesn't cause permanent damage.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Because irreversible joint changes can occur as early as the first year of RA, HCPs aggressively prescribe DMARDs like methotrexate early to slow disease progression and reduce erosion/deformity risk — even with mild symptoms."},
+
+{d:"RA",type:"single",q:"The nurse is assessing a patient with suspected RA. Which finding would most strongly support the diagnosis over OA?",
+opts:["Asymmetric involvement of the right knee only","Morning stiffness lasting over an hour that improves somewhat with use","Heberden nodes on the DIP joints","Crepitation during joint movement"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Prolonged morning stiffness (>1 hour) that may improve with joint use is characteristic of RA. Asymmetric involvement, Heberden nodes, and crepitation are all OA findings, not RA."},
+
+{d:"RA",type:"sata",q:"Which laboratory findings would the nurse expect in a patient with active rheumatoid arthritis? Select all that apply.",
+opts:["Positive rheumatoid factor (RF)","Elevated erythrocyte sedimentation rate (ESR)","Positive anti-CCP antibodies","Decreased C-reactive protein (CRP)","Elevated MMP-3 in synovial fluid"],
+correct:[0,1,2,4],
+rationale:"<span class='lbl right'>Correct (0,1,2,4):</span> RA is associated with positive RF (~80%), positive anti-CCP (60-80%, more specific than RF), elevated ESR (inflammation marker), and elevated synovial MMP-3 (marker of progressive joint damage). <span class='lbl wrong'>Incorrect:</span> CRP is INCREASED, not decreased, in active RA — it's a marker of active inflammation."},
+
+{d:"RA",type:"single",q:"A patient with RA who takes methotrexate reports new fatigue and unusual bruising. What is the nurse's priority action?",
+opts:["Reassure the patient this is an expected side effect requiring no follow-up.","Instruct the patient to double the next dose to compensate.","Notify the provider, as this may indicate bone marrow suppression requiring lab evaluation.","Advise the patient to stop the medication immediately without contacting the provider."],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Fatigue and bruising in a patient on methotrexate raise concern for bone marrow suppression, a rare but serious side effect requiring CBC monitoring. The provider should be notified promptly; the patient should not independently stop or double the dose."},
+
+{d:"RA",type:"single",q:"A patient beginning therapy with a TNF inhibitor (adalimumab) for RA asks why she needs a chest x-ray and PPD skin test first. What is the nurse's best explanation?",
+opts:["\"These tests are unrelated to your RA treatment and are just routine.\"","\"TNF inhibitors increase the risk for tuberculosis, so we need to screen for latent infection before starting.\"","\"These tests confirm your RA diagnosis before starting any medication.\"","\"This is required only if you have a family history of RA.\"" ],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> TNF inhibitors increase the risk for tuberculosis. A tuberculin test and chest x-ray must be performed BEFORE starting therapy, and the patient should have a yearly PPD while on the medication."},
+
+{d:"RA",type:"single",q:"Which two RA biologic classes should NOT be combined due to increased infection risk?",
+opts:["Methotrexate and hydroxychloroquine","TNF inhibitors and IL-1 receptor antagonists (or abatacept)","NSAIDs and acetaminophen","Sulfasalazine and leflunomide"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> TNF inhibitors should not be combined with IL-1 receptor antagonists (anakinra, canakinumab) or with abatacept, because stacking potent immune blockades significantly increases infection risk without added benefit."},
+
+{d:"RA",type:"single",q:"A patient on hydroxychloroquine for RA is due for her annual visit. Which referral should the nurse ensure is completed?",
+opts:["Dermatology for a skin biopsy","Ophthalmology for an eye examination","Cardiology for an echocardiogram","Pulmonology for a chest CT"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Hydroxychloroquine carries a risk of retinopathy and vision loss; patients need a baseline eye exam with follow-up every 6-12 months. None of the other referrals are specifically indicated for hydroxychloroquine monitoring."},
+
+{d:"RA",type:"single",q:"The nurse is positioning a patient with RA in bed. Which action is contraindicated?",
+opts:["Using a firm mattress or bed board","Encouraging positions of extension","Placing a pillow under the patient's knees","Using a small, flat pillow under the head and shoulders"],
+correct:[2],
+rationale:"<span class='lbl wrong'>Contraindicated:</span> Pillows should NEVER be placed under the knees of an RA patient — this increases the risk for joint contracture by encouraging flexion. The other options (firm mattress, extension positioning, small flat head pillow) are all appropriate."},
+
+{d:"RA",type:"single",q:"A patient with an acute RA flare asks how long she should apply an ice pack to her swollen wrist. What is the nurse's best response?",
+opts:["\"Apply it for at least 45 minutes for maximum benefit.\"","\"Apply it for no more than 10 to 15 minutes at a time.\"","\"Ice should never be used during an RA flare.\"","\"Apply it continuously throughout the day.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Cold application in RA should not exceed 10-15 minutes at a time. It is especially helpful during periods of increased disease activity (flares)."},
+
+{d:"RA",type:"single",q:"During an acute RA flare, how many repetitions of joint exercise should the nurse recommend?",
+opts:["As many as the patient can tolerate to prevent stiffness","1 to 2 repetitions only","At least 20 repetitions per joint","RA patients should not exercise at all during a flare"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> During acute inflammation, exercise should be limited to 1 or 2 repetitions to avoid worsening joint damage, while still preventing complete immobility. Gentle ROM continues, but overaggressive exercise increases pain, inflammation, and joint damage."},
+
+{d:"RA",type:"sata",q:"The nurse is teaching small joint protection principles to a patient with RA. Which examples correctly demonstrate these principles? Select all that apply.",
+opts:["Pressing water from a sponge instead of wringing it.","Carrying a laundry basket with the fingertips for better grip.","Using faucets and doorknobs that push rather than turn.","Holding a book for long periods to build hand strength.","Sliding heavy objects across a counter instead of lifting them."],
+correct:[0,2,4],
+rationale:"<span class='lbl right'>Correct (0,2,4):</span> Pressing (not wringing), using push-type fixtures, and sliding instead of lifting all reduce joint stress. <span class='lbl wrong'>Incorrect:</span> Laundry should be carried in BOTH ARMS, not gripped with fingertips, and joints should be repositioned often — NOT held in one position for long periods, even for 'strengthening.'"},
+
+{d:"RA",type:"single",q:"A patient with RA wears wrist splints for symptom management. Which nursing action is essential regarding splint care?",
+opts:["Leave the splints on continuously without removal.","Remove the splints regularly to assess skin and perform ROM exercises, then reapply.","Apply the splints only during exercise sessions.","Discard the splints once pain resolves."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Splints must be removed regularly to assess skin integrity and perform ROM exercises, then reapplied as prescribed. Leaving them on continuously risks skin breakdown and further joint stiffness."},
+
+{d:"RA",type:"single",q:"A patient with RA on long-term corticosteroid therapy develops a moon face and expresses distress about her appearance. What is the nurse's best response?",
+opts:["\"You should stop the corticosteroid immediately to reverse these changes.\"","\"These changes are permanent and there is nothing that can be done.\"","\"These changes are from the medication and will improve several months after treatment ends — please don't stop or change your dose without talking to your provider first.\"","\"This means your RA is getting worse.\""],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Corticosteroid-induced Cushingoid features (moon face, fat redistribution) are expected and will resolve months after treatment ends. Patients must NOT stop or change the dose abruptly, as this can cause adrenal crisis and worsen disease activity."},
+
+{d:"RA",type:"single",q:"Which extraarticular manifestation of RA is characterized by splenomegaly and a low white blood cell count?",
+opts:["Sjögren syndrome","Felty syndrome","Rheumatoid nodules","Raynaud phenomenon"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Felty syndrome is a rare complication of long-standing RA marked by splenomegaly and leukopenia, increasing risk for infection and lymphoma. Sjögren involves dry eyes; rheumatoid nodules are firm subcutaneous masses; Raynaud is vasospastic finger discoloration."},
+
+{d:"RA",type:"single",q:"A patient with RA develops firm, nontender masses on the extensor surface of both elbows. The nurse recognizes this as which finding?",
+opts:["Tophi","Heberden nodes","Rheumatoid nodules","Bouchard nodes"],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Rheumatoid nodules are firm, nontender subcutaneous masses that develop in about half of RA patients, typically on pressure-bearing areas like the elbows. Tophi are gout deposits; Heberden/Bouchard nodes are OA findings on the fingers."},
+
+{d:"RA",type:"single",q:"Why is the risk of heart attack significantly higher in patients with RA compared to the general population?",
+opts:["RA directly blocks coronary arteries with immune complexes only.","Chronic inflammation damages endothelial cells, promoting atherosclerotic plaque formation.","RA patients are universally noncompliant with cardiac medications.","RA causes hypertension as its primary extraarticular manifestation."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Chronic inflammation in RA damages endothelial cells within blood vessels, leading to increased cholesterol plaque formation; when plaques break loose, heart attack or stroke can result. RA patients have a 60% higher risk of heart attack."},
+
+{d:"RA",type:"single",q:"The nurse coordinates a patient's physical therapy session with medication administration. What is the primary rationale for this coordination?",
+opts:["To reduce the total number of appointments needed","So the patient can receive timely analgesia before therapy","To save time for the physical therapist","Insurance requires coordination of all appointments"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> PT should be coordinated with the RN so the patient can receive timely analgesia before therapy sessions, maximizing participation and minimizing pain during exercise."},
+
+{d:"RA",type:"single",q:"A patient with RA is prescribed warm water exercise at 82°F (28°C). The patient states, \"This seems too easy — the water makes everything feel effortless.\" What is the nurse's best response?",
+opts:["\"You're right, this type of exercise provides minimal benefit.\"","\"Although movement feels easier due to buoyancy, water provides 2-way resistance that actually makes your muscles work harder than on land.\"","\"You should switch to land-based exercise immediately since this isn't effective.\"","\"The temperature is too high and should be lowered.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> While buoyancy and warmth make movement feel easier, water provides 2-way resistance, making muscles work HARDER than they would on land. The prescribed temperature range (78-86°F/25-30°C) is appropriate."},
+
+{d:"RA",type:"sata",q:"A patient is prescribed a TNF inhibitor for RA. Which teaching points should the nurse include? Select all that apply.",
+opts:["Report any signs of infection immediately.","Live virus vaccines are safe to receive at any time during treatment.","A yearly PPD test will be needed to monitor for tuberculosis.","Injection site reactions typically decrease with continued therapy.","This medication cures RA and eliminates the need for other treatments."],
+correct:[0,2,3],
+rationale:"<span class='lbl right'>Correct (0,2,3):</span> Reporting infection, yearly PPD testing, and expected decrease in injection site reactions over time are all accurate teaching points. <span class='lbl wrong'>Incorrect:</span> Live virus vaccines must be given at least 4 weeks BEFORE starting therapy, not during treatment, and TNF inhibitors do not cure RA."},
+
+{d:"RA",type:"single",q:"A patient with RA reports increasing difficulty with grip strength and numbness in the thumb, index, and middle fingers. What underlying process does the nurse suspect?",
+opts:["Tenosynovitis causing carpal tunnel syndrome","Osteoarthritis of the wrist","Gouty tophi formation","Raynaud phenomenon"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Tenosynovitis affecting the flexor/extensor tendons around the wrists in RA causes carpal tunnel syndrome symptoms — numbness/tingling in the median nerve distribution and difficulty grasping objects."},
+
+{d:"RA",type:"single",q:"An older adult with long-standing RA who takes chronic corticosteroids reports new severe back pain after a minor fall. What complication is the priority concern?",
+opts:["Simple muscle strain","Vertebral compression fracture from corticosteroid-induced osteopenia","Normal age-related back pain","Gouty arthritis flare"],
+correct:[1],
+rationale:"<span class='lbl right'>Priority:</span> Corticosteroid use worsens bone density loss from aging, increasing risk for pathologic fractures, especially vertebral compression fractures — even minor trauma can cause a fracture in this population."},
+
+{d:"RA",type:"single",q:"A patient with RA states she feels hopeless and has been considering trying an unproven \"miracle cure\" advertised online instead of her prescribed DMARDs. What is the nurse's priority response?",
+opts:["Encourage her to try the alternative treatment since conventional medicine hasn't worked fast enough.","Explore her feelings, provide education about chronic illness coping, and discuss evidence-based options without judgment.","Tell her that alternative treatments are always dangerous and should never be discussed.","Ignore the comment since it's not a medical concern."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Chronic pain and disability make RA patients vulnerable to false advertising about unproven remedies. The nurse should explore her fears/concerns with empathy while reinforcing evidence-based care — not dismiss her feelings or endorse unproven treatments."},
+{d:"Gout",type:"single",q:"A 42-year-old man presents to the emergency department at 2 a.m. with sudden onset of severe pain, swelling, and dusky discoloration of his great toe that started while he was sleeping. Which condition does the nurse suspect?",
+opts:["Rheumatoid arthritis flare","Acute gout attack (podagra)","Osteoarthritis exacerbation","Septic joint from cellulitis"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Sudden nighttime onset of severe pain in the great toe (podagra) is the classic presentation of an acute gout attack, which typically peaks within several hours."},
+
+{d:"Gout",type:"single",q:"The nurse is caring for a patient with acute gout. Which nursing intervention is most appropriate for managing the affected joint?",
+opts:["Apply firm pressure and massage to the joint to improve circulation.","Use a bed cradle or footboard to keep bed linens off the affected extremity.","Encourage immediate weight-bearing and ambulation.","Apply a heating pad directly to the joint for comfort."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Because the acutely gouty joint is highly sensitive to light touch, a bed cradle or footboard protects the joint from the weight of bed linens. Massage, weight-bearing, and heat would all worsen pain in an acutely inflamed gout joint (cold, not heat, is used)."},
+
+{d:"Gout",type:"single",q:"A patient is prescribed colchicine for an acute gout attack. Which teaching point is most important?",
+opts:["\"Colchicine will relieve your pain directly since it's an analgesic.\"","\"Colchicine works best if taken within 12 hours of the attack starting, but you'll also need an NSAID for pain since colchicine isn't an analgesic.\"","\"You should stop the medication as soon as symptoms improve slightly.\"","\"This medication needs to be taken with aspirin for best effect.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Colchicine has antiinflammatory but NOT analgesic effects, so an NSAID must be added for pain. It works best given within 12 hours of attack onset. Aspirin should be avoided with gout medications like probenecid."},
+
+{d:"Gout",type:"sata",q:"The nurse is teaching a patient about dietary modifications to prevent future gout attacks. Which foods/beverages should the patient be taught to limit? Select all that apply.",
+opts:["Organ meats such as liver","Shellfish","Beer and red wine","Low-fat yogurt","Anchovies"],
+correct:[0,1,2,4],
+rationale:"<span class='lbl right'>Correct (0,1,2,4):</span> Organ meats, shellfish, beer/red wine, and anchovies are all high in purines and should be limited. <span class='lbl wrong'>Incorrect:</span> Low-fat yogurt is not a high-purine food and is not restricted."},
+
+{d:"Gout",type:"single",q:"A patient's serum uric acid level is normal during an acute gout attack. How should the nurse interpret this finding?",
+opts:["This rules out gout as the diagnosis.","Serum uric acid can be normal during an acute attack, so this finding does not rule out gout.","The patient must have been misdiagnosed with gout.","This indicates the attack has already resolved."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Hyperuricemia is not specifically diagnostic of gout because serum uric acid values may be normal during an acute attack. Synovial fluid aspiration showing needle-like urate crystals is the gold standard for diagnosis."},
+
+{d:"Gout",type:"single",q:"Which medication is considered first-choice for long-term maintenance therapy to prevent future gout attacks?",
+opts:["Colchicine","Probenecid","Allopurinol","Febuxostat"],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Allopurinol, a xanthine oxidase inhibitor that decreases uric acid production, is the drug used most often and the first choice for maintenance therapy. It can also be used in patients with kidney stones or renal impairment. Febuxostat is reserved for those who fail or cannot tolerate allopurinol."},
+
+{d:"Gout",type:"single",q:"A patient taking probenecid for gout management asks if she can take aspirin for a headache. What is the nurse's best response?",
+opts:["\"Aspirin is fine to take with probenecid at any dose.\"","\"You should avoid aspirin because it inactivates probenecid's effect and causes urate retention — acetaminophen is a safer choice.\"","\"Aspirin will enhance the effect of probenecid.\"","\"You need to double your probenecid dose if you take aspirin.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Aspirin inactivates probenecid's uricosuric effect, causing urate retention, and must be avoided. Acetaminophen can be used safely for analgesia instead."},
+
+{d:"Gout",type:"single",q:"A patient begins febuxostat (Uloric) for chronic gout management. Which finding requires immediate provider notification?",
+opts:["Mild GI upset after the first dose","Chest pain and shortness of breath","Occasional mild joint stiffness","Slight yellow discoloration of urine"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Febuxostat carries a Drug Alert for heart-related death and liver failure. Chest pain and shortness of breath require immediate notification. Patients with cardiovascular disease should also be encouraged to take low-dose aspirin."},
+
+{d:"Gout",type:"single",q:"A patient is started on probenecid for gout. Which instruction should the nurse include regarding fluid intake?",
+opts:["Limit fluid intake to less than 1 L per day.","Drink about 2 L of liquid a day and take the drug in the morning with food and water.","Fluid intake is not relevant to this medication.","Restrict all fluids for 2 hours after taking the medication."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Patients on probenecid should stay well hydrated, drinking about 2 L of liquid daily, and take the medication in the morning with food and water to reduce renal impairment risk."},
+
+{d:"Gout",type:"single",q:"Which patient population is probenecid LEAST likely to be effective for?",
+opts:["A 35-year-old with normal renal function","A patient with mild, well-controlled hypertension","A patient over age 60 with reduced creatinine clearance","A patient newly diagnosed with gout"],
+correct:[2],
+rationale:"<span class='lbl right'>Correct:</span> Uricosurics like probenecid are ineffective when creatinine clearance is reduced, which commonly occurs in patients over age 60 or with renal impairment."},
+
+{d:"Gout",type:"single",q:"A patient's gout has progressed to hard, white nodular deposits visible on the ear helix and near the elbow joints. What are these deposits called, and what do they indicate?",
+opts:["Rheumatoid nodules; indicate RA co-existing with gout","Tophi; indicate chronic gout, often with higher serum uric acid levels","Heberden nodes; indicate osteoarthritis","Bouchard nodes; indicate early gout"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Tophi are hard, white nodules of sodium urate crystal deposits characteristic of chronic gout. They often appear many years after disease onset, and tend to appear earlier with higher serum uric acid levels."},
+
+{d:"Lyme",type:"single",q:"A patient returns from a camping trip in Maine reporting a rash that started as a small red spot at a tick bite site 2 weeks ago and has since expanded into a ring shape roughly 6 inches across. The nurse recognizes this as which finding?",
+opts:["Malar rash of SLE","Erythema migrans (EM), the hallmark of early Lyme disease","Discoid rash of chronic cutaneous lupus","Rheumatoid nodule"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Erythema migrans, the classic 'bull's-eye rash,' appears at the tick bite site within 1 month of exposure and expands to a ring up to 12 inches across. It occurs in about 80% of infected persons and is not itchy or painful."},
+
+{d:"Lyme",type:"single",q:"A patient asks the nurse whether she can catch Lyme disease from her husband, who was recently diagnosed. What is the nurse's best response?",
+opts:["\"Yes, Lyme disease spreads easily through close contact.\"","\"Lyme disease is not spread from person to person — it requires an infected tick bite.\"","\"Only sexual contact can transmit Lyme disease between partners.\"","\"You should avoid all contact with your husband until his treatment is complete.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Person-to-person transmission of Lyme disease does not occur. It is transmitted only by the bite of an infected deer tick."},
+
+{d:"Lyme",type:"single",q:"A patient's Lyme disease enzyme immunoassay (EIA) returns positive. What is the appropriate next step?",
+opts:["No further testing is needed; treatment can begin based on the EIA alone.","A Western blot test should be performed to confirm the diagnosis.","The EIA should be repeated three times before proceeding.","A synovial fluid aspiration is required to confirm Lyme disease."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Per the CDC's 2-step process, if the EIA is positive or inconclusive, a Western blot is performed next. Results are diagnostic only if BOTH tests are positive; the Western blot should never be used alone."},
+
+{d:"Lyme",type:"single",q:"Which antibiotic and duration are preferred for treating early-stage Lyme disease?",
+opts:["Amoxicillin for 30 days","Doxycycline for 10 to 14 days","Penicillin for 3 days","Azithromycin for 21 days"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Short-term therapy of 10-14 days of doxycycline is preferred because it treats both Lyme disease and human granulocytic anaplasmosis, which can be a co-infection from the same tick bite."},
+
+{d:"Lyme",type:"single",q:"A patient asks the nurse to demonstrate the correct way to remove an attached tick. Which technique is correct?",
+opts:["Cover the tick with petroleum jelly to suffocate it before removal.","Use fine-tipped tweezers to grasp the tick's mouth parts close to the skin and pull straight out with steady pressure.","Twist the tick counterclockwise while pulling it out quickly.","Crush the tick with bare fingers to kill it before disposal."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Fine-tipped tweezers should grasp the mouth parts as close to the skin as possible, pulling straight out with steady, even pressure — never twisting or jerking. Folk remedies (petroleum jelly, nail polish) and crushing with fingers should be avoided."},
+
+{d:"Lyme",type:"single",q:"After removing an embedded tick, the nurse instructs the patient to monitor for symptoms and seek care if which occurs?",
+opts:["Any symptoms appearing more than 60 days after removal","Flu-like symptoms or a bull's-eye rash within 2 to 30 days after removal","Only symptoms occurring within the first 24 hours","No monitoring is necessary after proper tick removal"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Patients should see a healthcare provider if flu-like symptoms or a bull's-eye rash appears within 2 to 30 days after tick removal."},
+
+{d:"Lyme",type:"single",q:"A patient with untreated Lyme disease develops facial drooping on one side. The nurse recognizes this as which complication?",
+opts:["Bell palsy, the most common neurologic manifestation of Lyme disease","Stroke secondary to Lyme carditis","A normal, expected symptom that requires no further workup","An unrelated finding"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Bell palsy is the most common neurologic effect of untreated Lyme disease, occurring as the spirochete spreads to the CNS."},
+
+{d:"Lyme",type:"single",q:"Which joint is most commonly affected when Lyme arthritis develops in an untreated patient?",
+opts:["The knee","The great toe","The temporomandibular joint","The distal interphalangeal joints"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Arthritis is the second most common manifestation of untreated Lyme disease, most often causing chronic pain and swelling in large joints, mainly the knee."},
+
+{d:"SLE",type:"single",q:"A 28-year-old woman presents with a butterfly-shaped rash across her cheeks and nose, joint pain, and fatigue. Which additional finding would most strongly support a diagnosis of SLE?",
+opts:["Positive antinuclear antibody (ANA) titer","Positive rheumatoid factor only, with negative ANA","Elevated uric acid level","Needle-like crystals on synovial fluid analysis"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> 97% of persons with SLE have a positive ANA, making it the most sensitive supportive finding, though not specific enough alone for diagnosis (4 of 11 criteria are needed). Uric acid crystals indicate gout, not SLE."},
+
+{d:"SLE",type:"single",q:"The nurse is caring for a patient with SLE experiencing a disease flare. Which assessment finding is the priority to report to the provider?",
+opts:["Mild joint stiffness in the morning","New-onset seizure activity","Fatigue that has been present for 2 weeks","A mild malar rash that has not changed"],
+correct:[1],
+rationale:"<span class='lbl right'>Priority:</span> New-onset seizures suggest neuropsychiatric SLE (NPSLE), which can result from focal disease (clots/antiphospholipid antibodies) or diffuse inflammatory disease — both require prompt evaluation. The other findings are expected, chronic SLE manifestations."},
+
+{d:"SLE",type:"single",q:"A patient with SLE asks why her disease seems to worsen right after giving birth. What is the nurse's best explanation?",
+opts:["This is unrelated to SLE and requires no explanation.","SLE tends to become worse in the immediate postpartum period due to hormonal changes.","This indicates a new diagnosis of RA instead.","Postpartum flares occur only in patients who breastfeed."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> SLE tends to worsen in the immediate postpartum period. Flares are common during this time regardless of feeding method, and therapeutic abortion offers the same postdelivery exacerbation risk as carrying to term."},
+
+{d:"SLE",type:"single",q:"Which cardiac complication is the leading cause of death in patients with SLE?",
+opts:["Pericarditis from viral infection","Dysrhythmias resulting from fibrosis of the SA and AV nodes","Simple hypertension unrelated to SLE","Rheumatic heart disease"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Cardiac involvement in SLE can include dysrhythmias due to fibrosis of the SA and AV nodes, which signals advanced disease and is the leading cause of death among SLE patients."},
+
+{d:"SLE",type:"single",q:"A patient with SLE is started on hydroxychloroquine. What key monitoring should the nurse reinforce?",
+opts:["Weekly blood glucose checks","Baseline and every 6-12 month eye examinations due to retinopathy risk","Daily chest x-rays","Monthly bone density scans only"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Hydroxychloroquine carries a risk of retinopathy that can develop over time and with high doses; regular eye exams every 6-12 months are essential, though retinopathy generally reverses when the drug is stopped."},
+
+{d:"SLE",type:"sata",q:"The nurse is teaching a patient with SLE about factors that can trigger a disease flare. Which factors should be included? Select all that apply.",
+opts:["Sun exposure","Emotional stress","Regular moderate exercise within tolerance","Infection","Abruptly stopping prescribed medications"],
+correct:[0,1,3,4],
+rationale:"<span class='lbl right'>Correct (0,1,3,4):</span> Fatigue, sun exposure, emotional stress, infection, drugs, and surgery are the six factors that can increase SLE disease activity; abruptly stopping medication can also worsen activity. <span class='lbl wrong'>Incorrect:</span> Regular moderate exercise within tolerance is part of a healthy management plan, not a flare trigger."},
+
+{d:"SLE",type:"single",q:"A patient with SLE and renal involvement is started on cyclophosphamide. Which nursing action is most important?",
+opts:["Monitor closely for toxicity and side effects since immunosuppressive drugs carry significant risk.","No special monitoring is required for this medication.","Administer the medication only at bedtime.","Encourage the patient to avoid all fluids while on this medication."],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Immunosuppressive drugs like cyclophosphamide and azathioprine reduce end-organ damage in lupus nephritis but require close monitoring for toxicity and side effects."},
+
+{d:"SLE",type:"single",q:"Which teaching point regarding sun exposure is most appropriate for a patient with SLE?",
+opts:["Sun exposure has no effect on SLE disease activity.","Use sunscreen of at least SPF 15 and minimize sun exposure between 11 a.m. and 3 p.m.","Avoid all sunscreens because they can trigger flares.","Tanning beds are a safe alternative to natural sunlight."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Patients with SLE should use sunscreen of at least SPF 15, wear protective clothing, and minimize sun exposure from 11:00 AM to 3:00 PM, since UV exposure is a known flare trigger and cause of photosensitive rashes."},
+
+{d:"SLE",type:"single",q:"A pregnant patient with SLE who has been taking methotrexate needs preconception counseling. What is the priority teaching point?",
+opts:["Methotrexate can be safely continued throughout pregnancy.","Methotrexate should be stopped or switched up to 3 months before attempting to become pregnant due to teratogenicity.","No medication changes are needed prior to pregnancy.","Only insulin needs to be adjusted before pregnancy."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Methotrexate is teratogenic and should be stopped or switched to a safer alternative (such as hydroxychloroquine, which can be safely continued in pregnancy) up to 3 months before attempting conception."},
+
+{d:"SLE",type:"single",q:"A patient with SLE develops sudden left-sided weakness and slurred speech. The nurse understands this is most consistent with which process?",
+opts:["Diffuse NPSLE caused by an inflammatory process","Focal NPSLE caused by clots, especially with antiphospholipid antibodies","A normal, expected SLE symptom requiring no intervention","Fibromyalgia-related cognitive changes"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Focal NPSLE is caused by clots, especially in the presence of antiphospholipid antibodies, and can present as a stroke — this is a neurologic emergency requiring immediate evaluation, not diffuse (psychiatric) NPSLE."},
+
+{d:"SLE",type:"single",q:"Why are patients with SLE at increased risk for infection?",
+opts:["Only because of poor personal hygiene habits","Due to impaired ability to destroy bacteria, deficient antibody production, and immunosuppressive effects of antiinflammatory drugs","SLE patients are not actually at increased risk for infection","Because they avoid all recommended vaccinations"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Three mechanisms increase infection risk in SLE: impaired ability to destroy invading bacteria, deficient antibody production, and immunosuppressive effects of many antiinflammatory drugs. Vaccinations are safe (except live virus vaccines for those on corticosteroids/cytotoxic drugs)."},
+
+{d:"FMS",type:"single",q:"A 38-year-old woman reports widespread burning pain for the past 4 months, affecting both sides of her body and above and below her waist, along with severe fatigue and 'brain fog.' Physical exam reveals tenderness at 13 of 18 designated points. Which condition does the nurse suspect?",
+opts:["Rheumatoid arthritis","Fibromyalgia","Systemic lupus erythematosus","Osteoarthritis"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Widespread nonarticular pain lasting at least 3 months, present on both sides and above/below the waist, with tenderness at 11+ of 18 tender points, and cognitive symptoms ('fibro fog') is classic for fibromyalgia — a central pain processing disorder, not a joint-destructive disease."},
+
+{d:"FMS",type:"single",q:"The nurse is explaining the pathophysiology of fibromyalgia to a patient. Which statement is most accurate?",
+opts:["\"Fibromyalgia is caused by autoimmune destruction of your joints, similar to RA.\"","\"Fibromyalgia involves abnormal processing of pain signals in your central nervous system, with pain inhibitory pathways that don't work effectively.\"","\"Fibromyalgia is purely a psychological condition with no physical basis.\"","\"Fibromyalgia results from crystal deposits in your joints.\""],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> FMS involves abnormal central processing of nociceptive pain input; pain inhibitory pathways don't work effectively, and PET scans show widespread neuroinflammation. It is a nonarticular condition — the joints are not being destroyed."},
+
+{d:"FMS",type:"single",q:"A patient with fibromyalgia describes pain triggered by light touch from her clothing that would not normally cause discomfort. The nurse documents this as which finding?",
+opts:["Crepitation","Allodynia","Podagra","Pannus formation"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Allodynia is pain in response to a stimulus that does not typically cause pain — a hallmark finding in fibromyalgia due to central sensitization."},
+
+{d:"FMS",type:"single",q:"Which combination of drugs represents first-line therapy specifically for the chronic widespread pain of fibromyalgia?",
+opts:["Allopurinol and colchicine","Pregabalin, duloxetine, and milnacipran","Methotrexate and hydroxychloroquine","High-dose systemic corticosteroids"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Pregabalin (Lyrica), duloxetine (Cymbalta), and milnacipran (Savella) are the named first-line agents for chronic widespread pain in FMS. The other options are used for gout and RA/SLE, not FMS."},
+
+{d:"FMS",type:"single",q:"A patient with fibromyalgia who also has major depressive disorder is prescribed an SSRI. What should the nurse understand about this prescription?",
+opts:["SSRIs are never used in fibromyalgia patients.","SSRIs are reserved for patients who also have depression and may require higher doses than when treating depression alone.","The SSRI dose will always be lower than for depression treatment.","SSRIs directly cure the fibromyalgia pain syndrome."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> SSRIs (e.g., sertraline, paroxetine) tend to be reserved for FMS patients who also have depression and may need to be prescribed at HIGHER doses than when used solely for depression."},
+
+{d:"FMS",type:"single",q:"Which nondrug intervention is specifically noted to help prevent muscle atrophy in patients with fibromyalgia?",
+opts:["Complete bed rest","Low-impact aerobic exercise such as walking","Avoidance of all physical activity","High-intensity resistance training only"],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Low-impact aerobic exercise such as walking helps prevent muscle atrophy in FMS patients. Yoga and Tai Chi are also often helpful; complete inactivity worsens outcomes."},
+
+{d:"FMS",type:"single",q:"A patient with fibromyalgia asks about dietary changes that might help her symptoms. What should the nurse recommend limiting?",
+opts:["Sugar, caffeine, and alcohol, as they may act as muscle irritants","All protein sources","Water intake","Fresh vegetables"],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> Patients may consider limiting sugar, caffeine, and alcohol because they may be muscle irritants. A healthy, balanced diet is otherwise encouraged."},
+
+{d:"FMS",type:"single",q:"Long-acting opioids are being considered for a patient with fibromyalgia. What should the nurse understand about this approach?",
+opts:["Long-acting opioids are first-line therapy for FMS pain.","Long-acting opioids are not used unless other therapies have been unsuccessful.","Opioids cure the underlying central pain processing abnormality.","Opioids should be combined with all other FMS medications routinely."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Long-acting opioids are NOT used in FMS unless other therapies are not successful, reflecting caution given the syndrome's chronic nature and the availability of more targeted, evidence-based options."},
+
+{d:"Geronto",type:"single",q:"An 82-year-old patient with long-standing OA presents with new muscle weakness and generalized joint pain that seems out of proportion to imaging findings. The nurse should consider which possibility?",
+opts:["This is always a normal part of aging requiring no further evaluation.","The findings may be related to depression and physical inactivity rather than a purely structural cause.","This always indicates a new diagnosis of RA.","No further assessment is needed since the patient has known OA."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> In older adults, musculoskeletal pain syndromes and weakness may have no physical cause and may be related to depression and physical inactivity — this should be considered and assessed rather than assumed to be purely structural."},
+
+{d:"Geronto",type:"single",q:"Why is interpretation of RF and ESR results more difficult in older adults?",
+opts:["These tests cannot be performed in patients over age 65.","Age alone causes changes that make lab value interpretation more difficult, and drugs for comorbid conditions can also affect results.","Older adults never have elevated inflammatory markers.","These tests are only accurate in patients under age 40."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Age-related physiologic changes make interpretation of RF and ESR more difficult in older adults, and medications taken for comorbid conditions can further affect these lab values."},
+
+{d:"Geronto",type:"single",q:"The nurse is selecting an NSAID for an older adult with OA who has multiple comorbidities. Which consideration is most important?",
+opts:["Choosing an NSAID with a shorter half-life, which may need more frequent dosing but causes fewer side effects.","Always choosing the NSAID with the longest half-life for convenience.","NSAID choice does not matter in older adults.","Older adults should always receive the maximum NSAID dose available."],
+correct:[0],
+rationale:"<span class='lbl right'>Correct:</span> NSAIDs with a shorter half-life may require more frequent dosing but cause fewer side effects in older adults with altered drug metabolism, reducing risk for GI bleeding and renal toxicity — both increased risks in this population."},
+
+{d:"Geronto",type:"single",q:"An older adult with RA is on multiple medications for various comorbidities. What is the nurse's priority concern?",
+opts:["The patient is taking too few medications.","Polypharmacy increases the risk of drug interactions; the regimen should be kept as simple as possible.","Older adults never experience drug interactions.","This is not a nursing concern and requires no intervention."],
+correct:[1],
+rationale:"<span class='lbl right'>Correct:</span> Polypharmacy is a significant concern in older adults with RA; keeping the drug regimen as simple as possible increases adherence, especially for those lacking regular assistance."},
+];
+
+const DECK_NAMES = {
+  "OA":"Osteoarthritis","RA":"Rheumatoid Arthritis","Gout":"Gout",
+  "Lyme":"Lyme Disease","SLE":"SLE","FMS":"Fibromyalgia","Geronto":"Gerontologic"
+};
+const DECK_ORDER = ["ALL","OA","RA","Gout","Lyme","SLE","FMS","Geronto"];
+
+QUESTIONS.forEach((q,i)=>{ q._id=i; });
+
+let selectedDeck = "ALL";
+let selectedLen = "ALL";
+let quizPool = [];
+let quizQueue = [];
+let currentQIdx = 0;
+let score = 0;
+let missedIds = [];
+let currentShuffledOpts = [];
+let currentCorrectShuffled = [];
+let answered = false;
+let selections = [];
+
+function buildSetupUI(){
+  const dw = document.getElementById('setupDecks');
+  dw.innerHTML='';
+  DECK_ORDER.forEach(key=>{
+    const count = key==="ALL" ? QUESTIONS.length : QUESTIONS.filter(q=>q.d===key).length;
+    const label = key==="ALL" ? "All Sections" : DECK_NAMES[key];
+    const btn = document.createElement('button');
+    btn.className = 'deck-btn' + (key===selectedDeck?' active':'');
+    btn.innerHTML = label + " <span class='cnt'>"+count+"</span>";
+    btn.onclick = ()=>{ selectedDeck=key; buildSetupUI(); };
+    dw.appendChild(btn);
+  });
+  const lw = document.getElementById('lenDecks');
+  lw.innerHTML='';
+  const avail = selectedDeck==="ALL" ? QUESTIONS.length : QUESTIONS.filter(q=>q.d===selectedDeck).length;
+  const lens = [
+    {k:"10",label:"10 questions",n:10},
+    {k:"25",label:"25 questions",n:25},
+    {k:"ALL",label:"All ("+avail+")",n:avail}
+  ];
+  lens.forEach(l=>{
+    const btn = document.createElement('button');
+    btn.className='deck-btn'+(selectedLen===l.k?' active':'');
+    btn.textContent=l.label;
+    if(l.n===0 || (l.k!=="ALL" && l.n>avail)) btn.style.opacity='.4';
+    btn.onclick=()=>{ selectedLen=l.k; buildSetupUI(); };
+    lw.appendChild(btn);
+  });
+}
+
+function shuffleArr(a){
+  a = a.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz(retryList){
+  let pool;
+  if(retryList){
+    pool = QUESTIONS.filter(q=>retryList.includes(q._id));
+  } else {
+    pool = selectedDeck==="ALL" ? QUESTIONS.slice() : QUESTIONS.filter(q=>q.d===selectedDeck);
+    pool = shuffleArr(pool);
+    if(selectedLen!=="ALL"){
+      const n = parseInt(selectedLen);
+      pool = pool.slice(0, Math.min(n, pool.length));
+    }
+  }
+  quizQueue = pool;
+  currentQIdx = 0;
+  score = 0;
+  missedIds = [];
+  document.getElementById('setup').style.display='none';
+  document.getElementById('results').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  selections = [];
+  const q = quizQueue[currentQIdx];
+  document.getElementById('pos').textContent = currentQIdx+1;
+  document.getElementById('tot').textContent = quizQueue.length;
+  document.getElementById('scoreLive').textContent = score;
+  document.getElementById('fill').style.width = ((currentQIdx)/quizQueue.length*100)+'%';
+  document.getElementById('tag').textContent = DECK_NAMES[q.d]||q.d;
+  document.getElementById('qtype').textContent = q.type==='sata' ? 'Select All That Apply' : 'Single Answer';
+  document.getElementById('qtext').textContent = q.q;
+  document.getElementById('rationale').classList.remove('show');
+  document.getElementById('rationale').innerHTML='';
+
+  // shuffle options, tracking correct indices
+  const order = shuffleArr(q.opts.map((_,i)=>i));
+  currentShuffledOpts = order.map(i=>q.opts[i]);
+  currentCorrectShuffled = order.map((origIdx,newIdx)=> q.correct.includes(origIdx) ? newIdx : -1).filter(x=>x>=0);
+
+  const ow = document.getElementById('opts');
+  ow.innerHTML='';
+  currentShuffledOpts.forEach((text,i)=>{
+    const div = document.createElement('div');
+    div.className = 'opt' + (q.type==='sata' ? ' sata' : '');
+    div.innerHTML = "<div class='mark'>"+(q.type==='sata'?'✓':'●')+"</div><div>"+text+"</div>";
+    div.onclick = ()=> selectOption(i, q.type);
+    ow.appendChild(div);
+  });
+  document.getElementById('submitBtn').disabled=false;
+  document.getElementById('submitBtn').style.display='inline-block';
+  document.getElementById('nextBtn').disabled=true;
+}
+
+function selectOption(i, type){
+  if(answered) return;
+  const opts = document.querySelectorAll('.opt');
+  if(type==='single'){
+    selections = [i];
+    opts.forEach((o,idx)=> o.classList.toggle('selected', idx===i));
+  } else {
+    const pos = selections.indexOf(i);
+    if(pos>=0) selections.splice(pos,1); else selections.push(i);
+    opts[i].classList.toggle('selected');
+  }
+}
+
+function submitAnswer(){
+  if(answered) return;
+  if(selections.length===0) return;
+  answered = true;
+  const q = quizQueue[currentQIdx];
+  const opts = document.querySelectorAll('.opt');
+  const correctSet = new Set(currentCorrectShuffled);
+  const selSet = new Set(selections);
+  let isCorrect = correctSet.size===selSet.size && [...correctSet].every(x=>selSet.has(x));
+
+  opts.forEach((o,idx)=>{
+    o.classList.add('disabled');
+    o.onclick=null;
+    if(correctSet.has(idx)) o.classList.add('correct');
+    else if(selSet.has(idx)) o.classList.add('incorrect');
+  });
+
+  if(isCorrect) score++;
+  else missedIds.push(q._id);
+
+  const rat = document.getElementById('rationale');
+  rat.innerHTML = "<span class='lbl "+(isCorrect?'right':'wrong')+"'>"+(isCorrect?'Correct!':'Incorrect.')+"</span>" + q.rationale;
+  rat.classList.add('show');
+
+  document.getElementById('scoreLive').textContent = score;
+  document.getElementById('submitBtn').style.display='none';
+  document.getElementById('nextBtn').disabled=false;
+  document.getElementById('fill').style.width = ((currentQIdx+1)/quizQueue.length*100)+'%';
+}
+
+function nextQ(){
+  if(!answered) return;
+  if(currentQIdx < quizQueue.length-1){
+    currentQIdx++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz(){
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('results').style.display='block';
+  document.getElementById('finalScore').textContent = score+" / "+quizQueue.length;
+  const pct = Math.round((score/quizQueue.length)*100);
+  document.getElementById('finalPct').textContent = pct+"%";
+  const retryBtn = document.querySelector('#results button.primary');
+  if(missedIds.length===0){
+    retryBtn.disabled = true;
+    retryBtn.textContent = "No Missed Questions!";
+  } else {
+    retryBtn.disabled = false;
+    retryBtn.textContent = "Retry Missed Questions ("+missedIds.length+")";
+  }
+}
+
+function retryMissed(){
+  if(missedIds.length===0) return;
+  const toRetry = missedIds.slice();
+  startQuiz(toRetry);
+}
+
+buildSetupUI();
+</script>
+</body>
+</html>
